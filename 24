@@ -1,0 +1,160 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+const int Bin = 2;
+const int Oct = 8;
+const int Dec = 10;
+const int Hex = 16;
+
+
+int decToBin(int);
+int reverseBin(int);
+void binToOct(int);
+void binToHex(int);
+
+int main()
+{
+	int total = 0, i = 0;
+	string number = {};
+	int base = 0;;
+
+	// Convert a Decimal number into another base
+	
+	// Prompt user for an integer
+	cout << "Enter a number <0-999>: " << endl;
+	cin >> number;
+	cout << endl;
+
+	// String to int
+	for (i = 0; i < number.length(); i++)
+	{
+		if (number[i] >= '0' && number[i] <= '9')
+		{
+			total *= 10;
+			total += number[i] - '0';
+		}
+	}
+
+	// Prompt user for base
+	cout << "Enter what base to convert to <2/8/10/16>: ";
+	cin >> base;
+	cout << endl;
+
+	if (base == Bin)
+	{
+		total = reverseBin(decToBin(total));
+	}
+	else if (base == Oct)
+	{
+		binToOct(decToBin(total));
+	}
+	else if (base == Hex)
+	{
+		binToHex(decToBin(total));
+	}
+	system("pause");
+	return 0;
+}
+
+int decToBin(int num)
+{
+	int bin = 0;
+	while (num > 0)
+	{
+		bin *= 10;
+		if (num % 2 == 1)
+			bin += 1;
+		num /= 2;
+	}
+	return bin;
+}
+
+int reverseBin(int num)
+{
+	int bin = 0;
+	//reverse bin and store into num
+	while (num > 0)
+	{
+		bin *= 10;
+		if (num % 2 == 1)
+			bin += 1;
+		num /= 10;
+	}
+	return bin;
+}
+
+void binToOct(int num)
+{
+	string oct[8] = { "000", "100", "010", "110", "001", "101", "011", "111" };
+	string numero = to_string(num);
+	int octal = 0, i;
+	string chunk = {};
+	//convert
+	while (numero.length() > 0)
+	{
+		octal *= 10;
+		//break off 3 places
+		while (numero.length() < 3)
+			numero.append("0");
+		chunk = numero.substr(0, 3);
+		numero = numero.substr(3, numero.length());
+		//find value
+		for (i = 0; i < Oct && chunk != oct[i]; i++);
+		//add value to Octal
+		octal += i;
+	}
+	string printOct = to_string(octal);
+	for (int i = printOct.length() - 1; i >= 0; i--)
+	{
+		cout << printOct[i];
+	}
+	cout << endl;
+}
+void binToHex(int num)
+{
+	string hex[16] = { "0000", "1000", "0100", "1100",
+		"0010", "1010", "0110", "1110", "0001", "1001",
+		"0101", "1101", "0011", "1011", "0111", "1111" };
+	string numero = to_string(num);
+	int i;
+	string hexa = {}, chunk = {};
+	//convert
+	while (numero.length() > 0)
+	{
+		//break off 3 places
+		while (numero.length() < 4)
+			numero.append("0");
+		chunk = numero.substr(0, 4);
+		numero = numero.substr(4, numero.length());
+		//find value
+		for (i = 0; i < Hex && chunk != hex[i]; i++);
+		//add value to Octal
+		if (i > 9 && i < 16)
+		{
+			switch (i)
+			{
+			case 10: hexa.append("A");
+				break;
+			case 11:hexa.append("B");
+				break;
+			case 12:hexa.append("C");
+				break;
+			case 13:hexa.append("D");
+				break;
+			case 14:hexa.append("E");
+				break;
+			case 15:hexa.append("F");
+				break;
+			}
+		}
+		else
+			hexa.append(to_string(i));
+	}
+	cout << "0x";
+	for (int i = hexa.length() - 1; i >= 0; i--)
+	{
+		cout << hexa[i];
+	}
+	cout << endl;
+}
