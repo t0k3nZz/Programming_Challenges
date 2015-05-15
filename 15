@@ -1,0 +1,15 @@
+#include<iostream>
+#include<string>
+#include<algorithm>
+
+int main()
+{
+	std::string s;
+	std::cout << "Enter a string: ";
+	std::getline(std::cin, s);
+	std::cout << std::endl << s << std::endl;
+	std::reverse(s.begin(), s.end());
+	std::cout << s << std::endl;
+	system("pause");
+	return 0;
+}
