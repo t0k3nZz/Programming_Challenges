@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int age;
+	long long int ageInSec = 0;
+	// Prompt user for age
+	cout << "Enter age: ";
+	cin >> age;
+
+	// Convert
+	ageInSec = age * 31536000;
+
+	// display
+	cout << "Your age in seconds is:" << ageInSec << endl;
+	system("pause");
+	return 0;
+}
