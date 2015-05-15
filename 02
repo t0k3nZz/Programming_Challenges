@@ -1,0 +1,87 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main()
+{
+	char inType;
+	char outType;
+	double temp = 0.0;
+
+	// prompt the user for a temp type
+	// C, F, or K
+	cout << "What temp are you converting from?<c/f//k>: ";
+	cin >> inType;
+	cout << endl;
+
+	// Prompt user for temp
+	cout << "Enter the temperature: ";
+	cin >> temp;
+	cout << endl;
+
+	// Prompt user for conversion type
+	// K, F, or C
+	cout << "What temp are you converting to?<c/f//k>: ";
+	cin >> outType;
+	cout << endl;
+
+	// Convert
+	if (inType == 'f')
+	{
+		if (outType == 'c')
+		{
+			temp = temp - 32 * 5 / 9;
+		}
+		else if (outType == 'k')
+		{
+			temp = temp - 32 * 5 + 273.15;
+		}
+		else
+		{
+			cout << "Input error! Closing...";
+			return -1;
+		}
+	}
+	else if (inType == 'c')
+	{
+		if (outType == 'f')
+		{
+			temp = temp * 9 / 5 + 32;
+		}
+		else if (outType == 'k')
+		{
+			temp += 273.15;
+		}
+		else
+		{
+			cout << "Input error! Closing...";
+			return -1;
+		}
+	}
+	else if (inType == 'k')
+	{
+		if (outType == 'f')
+		{
+			temp = 9 / 5 * (temp - 273) + 32;
+		}
+		else if (outType == 'c')
+		{
+			temp = temp - 273.15;
+		}
+		else
+		{
+			cout << "Input error! Closing...";
+			return -1;
+		}
+	}
+	else
+	{
+		cout << "Input error! Closing...";
+		return -1;
+	}
+
+	// Display
+	cout << temp << endl;
+	system("pause");
+	return 0;
+}
